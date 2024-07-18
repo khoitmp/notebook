@@ -42,6 +42,7 @@ sudo apt install gnome-tweaks -y
 sudo apt install wireguard -y
 sudo apt install resolvconf -y
 sudo apt install dnsutils -y
+sudo apt install sshpass -y
 sudo apt install ./deb/google-chrome-stable_current_amd64.deb -y
 sudo apt install ./deb/code_1.88.1-1712771838_amd64.deb -y
 sudo apt install ./deb/azuredatastudio-linux-1.48.0.deb -y

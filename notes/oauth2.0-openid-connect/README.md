@@ -1,3 +1,5 @@
+# OAuth 2.0 and OpenID Connect
+
 ## Identity use cases (pre-2010)
 - Simple login (forms & cookie)
 - Single sign-on across sites (SAML)

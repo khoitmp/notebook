@@ -146,3 +146,8 @@ curl https://<domain>/<file>.txt # View file content
 curl -O https://<domain>/<file>.txt # Download the file
 curl -I https://<domain>/<file>.txt # View response headers
 ```
+
+### SSHPass
+```sh
+sshpass -p <password> ssh <username>@<hostname>
+```

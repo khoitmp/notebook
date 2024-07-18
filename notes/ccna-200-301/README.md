@@ -1,3 +1,5 @@
+# CCNA 200-301
+
 ## OSI
 - Application: HTTP, FTP, DNS, SNMP, Telnet,...
 - Presentation: SSL, TLS,...
@@ -7,7 +9,7 @@
 - Data Link Layer: PPP, ATM, Ethenet,...
 - Physical Layer: Ethenet, USB, Bluetooth, IEEE802.11,...
 
-*Note: Depends on Application layer port it can be TCP or UDP (https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers)
+*NOTE: Depends on Application layer port it can be TCP or UDP (https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers)
 
 ## Devices
 - Switch (L2)
@@ -41,7 +43,10 @@
   - **Transport**: Open `Segment` and check protocol (tcp), and check port (443)
   - **Application**: Open `Data` and check protocol (https) to determine which application will handle next
 
-*Note: The machanism could be different if the destination host network is not connected with the router. In this case, the router would perform NAT and save mapping in NAT table (host's IP, host's port number - the service sent the request, can be the browser or something), modify the package `Source IP`-Johnny to `Source IP`-Router (router public IP) with a unique port number of the router, then send the package to **networkchuck.coffee**. When getting back the reponse from **networkchuck.coffee** (to router public IP with its unique port number), the router would use NAT and look at NAT table again to determine which host (and its service port) in the local network to forward the message to
+*NOTE: The machanism could be different if the destination host network is not connected with the router. In this case, the router would perform NAT and save mapping in NAT table (1), modify the package `Source IP`-Johnny to `Source IP`-Router (router public IP) with a unique port number of the router, then send the package to **networkchuck.coffee**. When getting back the reponse from **networkchuck.coffee** (to router public IP with its unique port number), the router would use NAT and look at NAT table again to determine which host (and its service port) in the local network to forward the message to
+
+(1) Host's IP, host's port number, the service/application sent the request, can be the browser or something, an service/application can open many ports at the same time for outgoing traffic (up to 2^16 per service/application independently in the OS), so it can get it back later in the right port
+(2) Same with the service/application at a server, like socket webserver, it could keep up to 2^16 ports to clients 
 
 ## DHCP
 - Host: 192.168.1.204

@@ -63,6 +63,13 @@ kubectl -n <ns> exec -it <pod_id> <shell_type>
 ## PV
 ```sh
 kubectl get pv
+kubectl get pvc
+```
+
+## Job
+```sh
+kubectl get jobs
+kubectl get cronjobs
 ```
 
 # Monitoring
