@@ -12,8 +12,8 @@
 
 ## Scale (HA)
 - In master-slaves model, we need to implement a load balancing approach
-    - Could be implemented directly in the code
-    - Could be using a middleware service
+  - Could be implemented directly in the code
+  - Could be using a middleware service
 
 ### Master Node
 - Only one master, multiple master is not a best practice
@@ -23,4 +23,7 @@
 - Secondary nodes in the Redis cluster that replicate data from the master node
 - They handle read operations and can also be promoted to master status if the current master node fails (automatic failover)
 
-*NOTE: **Azure Cache for Redis** will automatically manage the scale and replication in the background, no need to config master-slaves and load balancing. It's a better choice
+---
+**NOTE**** 
+  - **Azure Cache for Redis** will automatically manage the scale and replication in the background, no need to config master-slaves and load balancing. It's a better choice
+---

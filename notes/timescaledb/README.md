@@ -1,6 +1,6 @@
 # TimescaleDB
 
-## Concepts
+## Main purpose
 - Optimize for handling timeseries data, such as IoT data, sensor data,...
 
 ### Hypertable (chunks and partitions are interchangable)

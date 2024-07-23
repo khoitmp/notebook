@@ -6,8 +6,8 @@
   - **Ordering within Partition**: Messages with the same partition key are processed in order within their respective partition
 
 - **Consumer**
-    - **EventHubTrigger**: When using EventHubTrigger in Azure Functions, messages are automatically distributed among all partitions and consumed in parallel by function instances
-    - **Parallel Processing**: Azure Functions can process messages from all partitions simultaneously, which can potentially lead to out-of-order processing unless additional handling is implemented
+  - **EventHubTrigger**: When using EventHubTrigger in Azure Functions, messages are automatically distributed among all partitions and consumed in parallel by function instances
+  - **Parallel Processing**: Azure Functions can process messages from all partitions simultaneously, which can potentially lead to out-of-order processing unless additional handling is implemented
 
 ## In Order Messaging
 - **Producer**

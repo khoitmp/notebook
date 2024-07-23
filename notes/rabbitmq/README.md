@@ -1,6 +1,6 @@
 # RabbitMQ
 
-## Concepts
+## Terminology
 - **Messaging**: RabbitMQ facilitates message-oriented communication between applications or components within a distributed system
 - **Producer**: An application or component that sends (produces) messages to RabbitMQ for delivery
 - **Consumer**: An application or component that receives (consumes) messages from RabbitMQ to process them
@@ -225,7 +225,7 @@ channel.BasicPublish(exchange: "fanout_exchange",
 - When the active master node for a queue becomes unavailable (e.g., due to a crash), RabbitMQ promotes one of the replica nodes to become the new active master
 - In RabbitMQ clusters, when you send a message to a specific queue (`queue1`, for example), you don't directly send it to a particular node within the cluster. Instead, you send the message to the RabbitMQ cluster itself, and RabbitMQ internally routes the message to the correct node that hosts the active master for `queue1` (no load balancing needed)
 
----------------------------------------
+<!-- ---------------------------------------
 |               CLUSTER               |
 ---------------------------------------
 ------------------   ------------------
@@ -237,14 +237,38 @@ channel.BasicPublish(exchange: "fanout_exchange",
 |                |   |                |
 |                |   |                |
 |                |   |                |
-|                |   |                |
+|                |   |                | -->
 
-*NOTE: The more nodes, the more active master nodes (for queues), the more replication queues
+```mermaid
+graph TD;
+    subgraph Cluster
+        direction TB;
+        Node1[Node 1]
+        Node2[Node 2]
 
-## Connection
-### Best Practices for Managing Connections
+    Node1 --> Queue1Active["queue1 (active)"]
+    Node1 --- Queue2Rep["queue2 (rep)"]
+
+    Node2 --> Queue2Active["queue2 (active)"]
+    Node2 --- Queue1Rep["queue1 (rep)"]
+
+    end
+
+    style Queue1Active fill:#ffcccc,color:#000000
+    style Queue2Active fill:#ffcccc,color:#000000
+    style Queue1Rep fill:#ffffff,color:#000000
+    style Queue2Rep fill:#ffffff,color:#000000
+```
+
+---
+**NOTE** 
+- The more nodes, the more active master nodes (for queues), the more replication queues
+---
+
+## Best Practices
+### Connections Management
 - **Singleton Connection**: Use a singleton pattern or dependency injection to manage a single RabbitMQ connection instance across your application
 - **Channel Multiplexing**: Create multiple channels within the single connection to perform different tasks (publishing, consuming, administrative operations)
-### Best Practices for Channel Management
+### Channel Management
 - **Reuse Channels**: Create channels once during initialization and reuse them throughout the application’s lifecycle
 - **Thread Safety**: Channels are not thread-safe, so ensure that each thread uses its own channel when performing RabbitMQ operations concurrently
