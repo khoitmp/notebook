@@ -44,9 +44,10 @@ sudo apt install resolvconf -y
 sudo apt install dnsutils -y
 sudo apt install sshpass -y
 sudo apt install ./deb/google-chrome-stable_current_amd64.deb -y
-sudo apt install ./deb/code_1.88.1-1712771838_amd64.deb -y
+sudo apt install ./deb/code_1.92.1-1723066302_amd64.deb -y
 sudo apt install ./deb/azuredatastudio-linux-1.48.0.deb -y
 ## Snap
+sudo snap install vlc
 sudo snap install postman
 sudo snap install remmina
 sudo snap install auto-cpufreq
@@ -114,8 +115,20 @@ sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
 
 # Install K8s
-curl -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o ~/.local/bin/kubectl
-sudo chmod +x ~/.local/bin/kubectl
+sudo curl -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/bin/kubectl
+sudo chmod +x /usr/bin/kubectl
+
+# Install Helm
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+sudo apt-get install apt-transport-https --yes
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
+
+# Install Terraform
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt update && sudo apt install terraform -y
 
 # Install .NET Core SDK
 wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb

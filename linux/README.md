@@ -37,7 +37,7 @@ top # Processes & comsumption
 htop
 nproc # Number of processors
 pwd # Current directory
-du -sh *<directory_name> # Directory
+du -sh *<path_to_directory> # Disk usage of the directory
 pstree # Processes in a tree
 arp -n # ARP Cache
 less # Get top records in a file
@@ -155,6 +155,17 @@ curl -I https://<domain>/<file>.txt # View response headers
 sshpass -p <password> ssh <username>@<hostname>
 ```
 
+### Compression
+```sh
+tar zxvf <file>.tar.gz -C <target_directory>
+```
+
+## Permission
+```sh
+# Set owner of the directory
+sudo chown -R <username>:<group_name> /<path_to_directory>
+```
+
 ## Setup
 ### Add your user into sudoer group
 ```sh
@@ -176,7 +187,7 @@ exit
 
 ### Run installation
 ```sh
-sudo chmod +x *.sh
+sudo chmod +rwx *.sh
 ```
 
 #### Debian client
