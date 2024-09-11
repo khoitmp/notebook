@@ -1,3 +1,6 @@
+# K8s
+
+## Commands
 |            | Command                                                                  | Params                          | Description                                                                                                                     |
 | ---------- | ------------------------------------------------------------------------ | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | Config     |                                                                          |                                 |                                                                                                                                 |
@@ -6,7 +9,7 @@
 |            | --show-labels                                                            |                                 | Get recoures with their labels                                                                                                  |
 |            | -o wide                                                                  |                                 | Get resources with their IPs                                                                                                    |
 |            | -n <namespace>                                                           |                                 | Get resources within specified namespace                                                                                        |
-|            |                                                                          |                                 |                                                                                                                                 |
+|            | -l <key>=<value>                                                         |                                 | Get resources with specified label                                                                                              |
 | Settings   |                                                                          |                                 |                                                                                                                                 |
 |            | kubectl version                                                          |                                 |                                                                                                                                 |
 |            | kubectl cluster info                                                     |                                 |                                                                                                                                 |
@@ -18,7 +21,6 @@
 | Namespace  |                                                                          |                                 |                                                                                                                                 |
 |            | kubectl get namespace                                                    |                                 |                                                                                                                                 |
 |            | kubectl create namespace <namespace>                                     |                                 |                                                                                                                                 |
-|            |                                                                          |                                 |                                                                                                                                 |
 | Nodes      |                                                                          |                                 |                                                                                                                                 |
 |            | kubectl get nodes                                                        |                                 |                                                                                                                                 |
 |            | kubectl label nodes <node_name> <key>=<value>                            |                                 | Create label                                                                                                                    |
@@ -29,7 +31,6 @@
 |            | kubectl delete pod <pod_id>                                              |                                 |                                                                                                                                 |
 |            | kubectl port-forward pod/<pod_id> <host_port>:<pod_port>                 |                                 |                                                                                                                                 |
 |            | kubectl exec                                                             | -it <pod_id> <shell_type>       | Shell a pod                                                                                                                     |
-|            |                                                                          |                                 |                                                                                                                                 |
 | Services   |                                                                          |                                 |                                                                                                                                 |
 |            | kubectl get services                                                     |                                 |                                                                                                                                 |
 |            | kubectl delete <service_name>                                            |                                 |                                                                                                                                 |
@@ -44,11 +45,10 @@
 |            | kubectl port-forward deployment/<deployment_name> <host_port>:<pod_port> |                                 |                                                                                                                                 |
 | Ingress    |                                                                          |                                 |                                                                                                                                 |
 |            | kubectl get ingress                                                      |                                 |                                                                                                                                 |
-|            |                                                                          |                                 |                                                                                                                                 |
+|            | kubectl describe ingress <ingress_name>                                  |                                 |                                                                                                                                 |
 | PV         |                                                                          |                                 |                                                                                                                                 |
 |            | kubectl get pv                                                           |                                 |                                                                                                                                 |
 |            | kubectl get pvc                                                          |                                 |                                                                                                                                 |
-|            |                                                                          |                                 |                                                                                                                                 |
 | Jobs       | kubectl get jobs                                                         |                                 |                                                                                                                                 |
 |            | kubectl get cronjobs                                                     |                                 |                                                                                                                                 |
 | Monitoring |                                                                          |                                 |                                                                                                                                 |
@@ -57,3 +57,37 @@
 |            | kubectl top pods                                                         | --sort-by=memory                |                                                                                                                                 |
 |            | kubectl top nodes                                                        |                                 |                                                                                                                                 |
 |            |                                                                          |                                 |                                                                                                                                 |
+
+## NGINX Controller
+- `Ingress Controller`:
+  - A separate DaemonSet (a controller which runs on all nodes, including any future ones) along with a Service that can be used to utilize routing and proxying. It's based for example on NGINX which acts as the old-school reverse proxy receiving incoming traffic and forwarding it to HTTP(S) routes defined in the Ingress resources in point 2 below (distinguished by their different routes/URLs)
+- `Ingress Rules`:
+  - Separate Kubernetes resources with kind: Ingress. Will only take effect if Ingress Controller is already deployed on that node
+  - While Ingress Controller can be deployed in any namespace it is usually deployed in a namespace separate from your app services (e.g. ingress or kube-system). It can see Ingress rules in all other namespaces and pick them up. However, each of the Ingress rules must reside in the namespace where the app that they configure reside
+
+### Controller
+```sh
+# Deploy the controller
+curl -O https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+
+# Check the controller installed
+kubectl get deployments -n <ns>
+kubectl get services -n <ns>
+kubectl get pods -n <ns>
+```
+
+### Resources
+```sh
+# Check the resources installed
+kubectl get ingress -n <ns>
+```
+
+## Cert Manager
+```sh
+kubectl apply -f clusterissuer.yaml              
+kubectl apply -f certificate.yaml
+
+# Check the certs installed
+kubectl describe certificate tls-cert -n default
+kubectl logs -l app=cert-manager -n cert-manager
+```

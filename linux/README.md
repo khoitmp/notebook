@@ -187,16 +187,21 @@ exit
 
 ### Run installation
 ```sh
-sudo chmod +rwx *.sh
+sudo chmod +x *.sh
+```
+
+### Set permission
+```sh
+sudo chown -R <username>:<username> <path>
 ```
 
 #### Debian client
 ```sh
-./debian12-setup.sh
-./debian12-post-setup.sh
+./debian-setup.sh
+./debian-post-setup.sh
 ```
 
 #### Debian server
 ```sh
-debian12-server-setup.sh
+debian-server-setup.sh
 ```

@@ -80,6 +80,7 @@
 - `Redirect URI`: URL of the client that the Authorization server will redirect back after the user clicked yes
 - `Access token`: The Client would need the token to call to **contacts.google.com** resource server
 - `Scope`: Basically, the Authorization server will have a list of scopes that it understands like *contacts.read, contacts.write, email.read, email.write,...*, and when the Client kicks off the flow, it needs to request for specific scopes, those scopes requested by the Client will be used to generate the consent screen at level of the Authorization server (if the user confirmed, then later the Client will have the access_token which has valid scopes to call resource server)
+- `Issuer`: The URL represents OpenID/OAuth 2.0 server
 
 ### 2. Flows
 - **Authorization code** (front channel + back channel | scope=`profile`; response_type=`code`; grant_type=`authorization_code`)

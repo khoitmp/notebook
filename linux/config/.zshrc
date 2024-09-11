@@ -95,10 +95,11 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias myip="curl ipinfo.io"
+alias von="sudo wg-quick up ~/vpn/thor.conf"
+alias voff="sudo wg-quick down ~/vpn/thor.conf"
+alias kube01="export KUBECONFIG=~/.kube/sgp1-k8s-cluster-01-kubeconfig.yaml; echo 'sgp1-k8s-cluster-01-kubeconfig.yaml';"
+alias kube02="export KUBECONFIG=~/.kube/kubeconfig.yaml; echo 'kubeconfig.yaml'"
 
 # ibus-bamboo (https://github.com/BambooEngine/ibus-bamboo/wiki/Kh%C3%B4ng-g%C3%B5-%C4%91%C6%B0%E1%BB%A3c-ti%E1%BA%BFng-vi%E1%BB%87t-tr%C3%AAn-ph%E1%BA%A7n-m%E1%BB%81m-%60abc-xyz%60#ki%E1%BB%83m-tra-bi%E1%BA%BFn-m%C3%B4i-tr%C6%B0%E1%BB%9Dng)
 GTK_IM_MODULE=ibus
@@ -117,3 +118,9 @@ export NVM_DIR="$HOME/.nvm"
 
 # Add path docfx manually
 export PATH="$HOME/.dotnet/tools:$PATH"
+
+# Config Kitty
+export TERM=xterm-256color
+
+# Config Golang
+export PATH=$PATH:/usr/local/go/bin
