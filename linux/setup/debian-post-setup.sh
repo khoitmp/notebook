@@ -20,3 +20,6 @@ source ~/.zshrc
 
 # Copy Kitty config
 cp ../config/kitty.conf ~/.config/kitty/kitty.conf
+
+# Copy SSH
+sudo cp -r ./.ssh /

@@ -225,20 +225,6 @@ channel.BasicPublish(exchange: "fanout_exchange",
 - When the active master node for a queue becomes unavailable (e.g., due to a crash), RabbitMQ promotes one of the replica nodes to become the new active master
 - In RabbitMQ clusters, when you send a message to a specific queue (`queue1`, for example), you don't directly send it to a particular node within the cluster. Instead, you send the message to the RabbitMQ cluster itself, and RabbitMQ internally routes the message to the correct node that hosts the active master for `queue1` (no load balancing needed)
 
-<!-- ---------------------------------------
-|               CLUSTER               |
----------------------------------------
-------------------   ------------------
-|     Node 1     |   |     Node 2     |
-------------------   ------------------
-| queue1 (active)|   | queue2 (active)|
-| queue2 (rep)   |   | queue2 (rep)   |
-|                |   |                |
-|                |   |                |
-|                |   |                |
-|                |   |                |
-|                |   |                | -->
-
 ```mermaid
 graph TD;
     subgraph Cluster
